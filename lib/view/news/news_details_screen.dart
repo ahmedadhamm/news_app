@@ -2,9 +2,18 @@ import 'package:apinew_app/core/model/news.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class NewsDetailsScreen extends StatelessWidget {
+class NewsDetailsScreen extends StatefulWidget {
   static const String routName = 'news_details';
 
+  @override
+  State<NewsDetailsScreen> createState() => _NewsDetailsScreenState();
+}
+
+class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var news = ModalRoute.of(context)?.settings.arguments as News;
@@ -68,7 +77,7 @@ class NewsDetailsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text('View Full Aritcl',style: TextStyle(
+                    const Text('View Full Ari tcl',style: TextStyle(
                       color: Color(0xff42505C),
                       fontSize: 14,
                     ),),

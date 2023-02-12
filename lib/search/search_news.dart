@@ -20,7 +20,7 @@ class _SearchNewsState extends State<SearchNews> {
     ApiManager.getNews(searchKeyword: query ?? '').then((newResponse) {
       newDataList = newResponse.newsList ?? [];
     }).catchError((error) {
-      print('Error During Searc !! $error');
+      print('Error During Search !! $error');
     });
     return newDataList;
   }
@@ -99,7 +99,7 @@ class _SearchNewsState extends State<SearchNews> {
                           color: Theme.of(context).primaryColor,
                         )),
                     hintText: 'Search Article',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: Color.fromRGBO(57, 165, 82, 0.3),
                     )),
               ),

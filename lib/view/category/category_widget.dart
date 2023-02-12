@@ -30,29 +30,42 @@ class _CategoryNewsListState
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CategoryNewsListViewModel>(
       create: (context) => viewModel,
-      child: Container(
-        child: Consumer<CategoryNewsListViewModel>(
-          builder: (BuildContext context, viewModel, __) {
-            if (viewModel.errorMessage != null) {
-              return Center(
-                child: Column(
-                  children: [
-                    Text(viewModel.errorMessage!),
-                    ElevatedButton(
-                        onPressed: () {}, child: const Text('Try Again'))
-                  ],
+      child: Consumer<CategoryNewsListViewModel>(
+        builder: (BuildContext context, viewModel, child) {
+          if (viewModel.errorMessage != null) {
+            return Center(
+              child: Column(
+                children: [
+                  child!,
+                  Text(viewModel.errorMessage!),
+                  ElevatedButton(
+                      onPressed: () {
+                        viewModel.loadNewsSources(widget.category.categoryID);
+                      },
+                      child: const Text('Try Again',))
+                ],
+              ),
+            );
+          }
+          else if  (viewModel.sources == null) {
+            return Column(
+              children:  [
+                child!,
+                 const Center(
+                  child: CircularProgressIndicator(),
                 ),
-              );
-            }
-            else if  (viewModel.sources == null) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );}
-            else {
-              return CategoryTabsWidget(viewModel.sources!);
-            }
-          },
-        ),
+              ],
+            );}
+          else {
+            return Column(
+              children: [
+                child!,
+                Expanded(child: CategoryTabsWidget(viewModel.sources!)),
+              ],
+            );
+          }
+        },
+        child: Text('header Text Veiw '),
       ),
     );
   }

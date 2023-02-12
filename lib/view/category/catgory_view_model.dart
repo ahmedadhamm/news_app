@@ -6,19 +6,24 @@ import 'package:apinew_app/view/category/navigator.dart';
 class CategoryNewsListViewModel
     extends BaseViewModel<CatgoryNewsListNavigator> {
   List<Source>? sources = null;
-  String? errorMessage=null;
+  String? errorMessage = null;
 
-  void loadNewsSources(String categoryId) async{
+  void loadNewsSources(String categoryId) async {
     //navigator?.showMessage('Loading...');
-    try{
-      var response = await  ApiManager.getSources(categoryId);
-      sources = response.sources;
-    }catch(e){
-     // navigator?.showMessage('Error getting news sources');
-      errorMessage='Error getting news sources';
+    errorMessage = null;
+    notifyListeners();
+    try {
+      var response = await ApiManager.getSources(categoryId);
 
+      if (response.status == 'Error') {
+        errorMessage = response.message;
+      } else {
+        sources = response.sources;
+      }
+    } catch (e) {
+      // navigator?.showMessage('Error getting news sources');
+      errorMessage = 'Error getting news sources';
     }
     notifyListeners();
   }
-
 }

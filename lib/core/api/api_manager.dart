@@ -20,8 +20,8 @@ class ApiManager {
     return SourcseResponse.fromJson(jsonDecode(response.body));
   }
 
-  static Future<NewsResponse> getNews(
-      {String? sourceId, String? searchKeyword}) async {
+  static Future<NewsResponse>
+  getNews({String? sourceId, String? searchKeyword}) async {
     //https://newsapi.org/v2/everything?
     // apiKey=9928ce6728d54a278fe60506a5915e1c
     // &sources=bbc-sport
